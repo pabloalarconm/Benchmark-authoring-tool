@@ -1,0 +1,5 @@
+services:
+  api:
+    image: pabloalarconm/benchmark-authoring-tool:0.0.1
+    ports:
+      - "8000:8000"

@@ -1,0 +1,18 @@
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX ftr: <https://w3id.org/ftr#> 
+PREFIX dqv: <http://www.w3.org/ns/dqv#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX sio: <http://semanticscience.org/resource/> 
+
+SELECT DISTINCT ?test
+
+WHERE {
+    VALUES ?metric {  <{{{metric}}}>  } .
+    VALUES ?creator {  <{{{creator}}}>  } .
+
+    ?test a ftr:Test ;
+            sio:SIO_000233 ?metric;
+            dcterms:creator ?creator.
+    ?metric a dqv:Metric .
+}

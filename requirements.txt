@@ -1,0 +1,6 @@
+fastapi
+pydantic
+uvicorn
+SPARQLWrapper
+chevron
+requests

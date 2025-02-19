@@ -1,0 +1,9 @@
+PREFIX dqv: <http://www.w3.org/ns/dqv#>
+PREFIX ftr: <https://w3id.org/ftr#> 
+
+SELECT DISTINCT ?metric
+WHERE {
+    ?benchmark a ftr:Benchmark; ftr:hasAssociatedMetric ?metric.
+    ?metric a dqv:Metric .
+}
+ORDER BY ?metric
