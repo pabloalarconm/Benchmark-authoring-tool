@@ -20,7 +20,7 @@ This is an API for extracting test information based on FAIR Metrics described i
 Use the pre-built Docker image from Docker Hub:  
 
 ```bash
-docker run -p 8000:8000 pabloalarconm/benchmark-authoring-tool:0.0.1
+docker run -p 8000:8000 pabloalarconm/benchmark-authoring-tool:0.0.2
 ```
 
 Alternatively, use **Docker Compose**:  
@@ -28,7 +28,7 @@ Alternatively, use **Docker Compose**:
 ```yaml
 services:
   api:
-    image: pabloalarconm/benchmark-authoring-tool:0.0.1 # Check the latest
+    image: pabloalarconm/benchmark-authoring-tool:0.0.2 # Check the latest
     ports:
       - "8000:8000"
 ```

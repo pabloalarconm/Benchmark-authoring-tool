@@ -34,7 +34,7 @@ class Benchmark:
 
         base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-        self.test_list = list()
+        self.test_result = list()
 
         for i, metric in enumerate(self.metrics_list, start=1):
             print(f"Calling FAIR Metric {i}/{len(self.metrics_list)}: {metric}")
@@ -46,17 +46,29 @@ class Benchmark:
             ENDPOINT.setQuery(imported_query)
             ENDPOINT.setReturnFormat(JSON)
             result = ENDPOINT.query().convert()
-
+            
             if not result["results"]["bindings"]:
                 print(f"No results found for metric: {metric}")
                 continue
+            
+            try:
+                test_string = result["results"]["bindings"][0]["test"]["value"]
+            except KeyError:
+                test_string = None
+                    
+            try:
+                api_string = result["results"]["bindings"][0]["api"]["value"]
+            except KeyError:
+                api_string = None
 
-            test_string = result["results"]["bindings"][0]["test"]["value"]
-            self.test_list.append(test_string)
+            if test_string is not None:
+                test_api = {test_string: api_string}
+                self.test_result.append(test_api)
+        
+        print(self.test_result)
+        return self.test_result
 
-        return self.test_list
-
-# # Test
-# test= Benchmark()
-# metrics_obtained = test.metric_from_benchmark(web_bench="https://oeg-upm.github.io/fair_ontologies/doc/benchmark/ALL/ALL.ttl")
-# test_final = test.call_fdp_for_test_information(creator="https://orcid.org/0000-0003-0454-7145")
+# Test
+test= Benchmark()
+metrics_obtained = test.metric_from_benchmark(web_benchmark="https://oeg-upm.github.io/fair_ontologies/doc/benchmark/ALL/ALL.ttl")
+test_final = test.call_fdp_for_test_information(creator="https://orcid.org/0000-0003-0454-7145")
